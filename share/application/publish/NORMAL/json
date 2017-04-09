@@ -1,0 +1,91 @@
+{
+  "id": "NORMAL",
+  "filled": "true",
+  "options": [
+    {
+      "id": "basic",
+      "name": "base.parameter",
+      "info": "Basic Parameters",
+      "option": [
+        {
+          "id": "COMMANDTORUN",
+          "type": "text",
+          "required": true,
+          "label": "Command",
+          "width": "42"
+        },
+        {
+          "id": "JOB_NAME",
+          "type": "text",
+          "name": "job.name",
+          "required": false,
+          "label": "Job Name"
+        },
+        {
+          "id": "NCPU",
+          "type": "text",
+          "name": "core.number",
+          "required": false,
+          "label": "Core"
+        },
+        {
+          "id": "QUEUE",
+          "type": "list",
+          "name": "queue",
+          "required": false,
+          "label": "Queue",
+          "default": "normal",
+          "script": {
+            "type": "system",
+            "value": "queue.sh"
+          }
+        },
+        {
+          "id": "CONSOLE_SUPPORT",
+          "type": "list",
+          "name": "console.support",
+          "required": false,
+          "label": "Console Support",
+          "option": [
+            {
+              "id": "Yes",
+              "required": false,
+              "value": "Yes"
+            },
+            {
+              "id": "No",
+              "required": false,
+              "value": "No"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "application",
+      "name": "application.parameter",
+      "info": "Application Parameters",
+      "option": [
+        {
+          "id": "INPUT_FILE",
+          "type": "file",
+          "name": "input.file",
+          "required": false,
+          "label": "Input File",
+          "width": "42"
+        }
+      ]
+    }
+  ],
+  "actions": {
+    "action": [
+      {
+        "name": "monitor",
+        "label": "Monitor",
+        "script": {
+          "value": "monitor.sh"
+        }
+      }
+    ]
+  }
+}

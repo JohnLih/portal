@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<application id="CFX" filled="false">
+    <options name="base.parameter" info="基本参数" id="basic">
+        <option type="text" name="job.name" required="false" label="作业名称" id="JOB_NAME" hidden="false"/>
+        <option type="list" name="project.name" required="true" label="项目名称" id="PROJECT" hidden="false">
+            <option selected="true" id="project">project</option>
+        </option>
+        <option type="ist" name="core.number" required="false" label="核数" id="NCPU" hidden="false">
+            <option selected="false" id="1">1</option>
+            <option selected="false" id="2">2</option>
+            <option selected="true" id="4">4</option>
+            <option selected="false" id="6">6</option>
+            <option selected="false" id="8">8</option>
+            <option selected="false" id="10">10</option>
+            <option selected="false" id="12">12</option>
+            <option selected="false" id="16">16</option>
+            <option selected="false" id="16">32</option>
+        </option>
+        <option type="list" name="queue" required="false" label="队列" id="QUEUE" hidden="false" default="normal">
+            <script type="system">queue.sh normal</script>
+        </option>
+    </options>
+    <options name="application.parameter" info="应用程序参数" id="application">
+        <option type="list" name="version" required="false" label="版本" id="VERSION" hidden="false">
+            <option selected="true" id="12.1">12.1</option>
+            <option selected="false" id="13.0">13.0</option>
+            <option selected="false" id="14.0">14.0</option>
+        </option>
+        <option type="list" name="interactive" required="false" label="是否支持交互" id="INTERACTIVE_SUPPORT" hidden="false">
+            <option selected="false" id="Yes">Yes</option>
+            <option selected="true" id="No">No</option>
+        </option>
+        <option type="list" name="interpolate" required="false" label="Interpolate" id="INTERPOLATE" hidden="false">
+            <option selected="true" id="Yes">Yes</option>
+            <option selected="false" id="No">No</option>
+        </option>
+        <option type="list" name="parallel.model" required="false" label="并行模式" id="RUN_MODE" hidden="false">
+            <option selected="false" id="HP MPI Local Parallel">HP MPI Local Parallel</option>
+            <option selected="true" id="HP MPI Distributed Parallel">HP MPI Distributed Parallel</option>
+            <option selected="false" id="PVM local Parallel">PVM local Parallel</option>
+            <option selected="false" id="PVM Distributed Parallel">PVM Distributed Parallel</option>
+            <option selected="false" id="MPICH Distributed Parallel">MPICH Distributed Parallel</option>
+            <option selected="false" id="MPICH Local Parallel">MPICH Local Parallel</option>
+            <option selected="false" id="Serial">Serial</option>
+            <option selected="false" id="Platform MPI Local Parallel">Platform MPI Local Parallel</option>
+            <option selected="false" id="Platform MPI Distributed Parallel">Platform MPI Distributed Parallel</option>
+            <option selected="false" id="Intel MPI Distributed Parallel">Intel MPI Distributed Parallel</option>
+            <option selected="false" id="Intel MPI Local Parallel">Intel MPI Local Parallel</option>
+        </option>
+        <option type="text" name="iterations.number" required="false" label="迭代次数" id="ITE_NUM" hidden="false"/>
+        <option type="ist" name="double.precision" required="false" label="是否支持双精度" id="DOUBLE_SUPPORT" hidden="false">
+            <option selected="false" id="Yes">Yes</option>
+            <option selected="true" id="No">No</option>
+        </option>
+        <option type="text" name="partitioner.memory.alloc.factor" required="false" label="Partitioner Memory Alloc Factor" id="PAR_MEM_FACTOR" hidden="false" default="1.0"/>
+        <option type="text" name="solver.memory.alloc.factor" required="false" label="Solver Memory Alloc Factor" id="SOL_MEM_FACTOR" hidden="false" default="1.0"/>
+        <option type="file" name="definition.file" width="42" required="true" label="Definition File (.def)" id="DEF_INPUT_FILE" hidden="false"/>
+        <option type="file" name="initial.values.file" width="42" required="false" label="Initial Values File(*.res)" id="INI_FILE" hidden="false"/>
+        <option type="file" name="resource.file" width="42" required="true" label="Resource Files (.res)" id="RES_INPUT_FILE" hidden="false"/>
+        <option type="file" name="other.file" width="42" required="true" label="Other Files" id="OTHER_INPUT_FILE" hidden="false"/>
+    </options>
+    <options name="install.application.parameter" info="install application params" id="mandatory">
+        <option type="text" name="cfx.executable.path" required="false" label="CFX Executable Path" id="CFX_PATH" hidden="false"/>
+    </options>
+</application>

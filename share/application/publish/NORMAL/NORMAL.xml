@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<application id="NORMAL" filled="true">
+    <options name="base.parameter" info="Basic Parameters" id="basic">
+        <option type="text" width="42" required="true" label="Command" id="COMMANDTORUN" hidden="false"/>
+        <option type="text" name="job.name" required="false" label="Job Name" id="JOB_NAME" hidden="false"/>
+        <option type="text" name="core.number" required="false" label="Core" id="NCPU" hidden="false"/>
+        <option type="list" name="queue" required="false" label="Queue" id="QUEUE" default="normal" hidden="false">
+            <script type="system" value="queue.sh"></script>
+        </option>
+        <option type="list" name="console.support" required="false" label="Console Support" id="CONSOLE_SUPPORT" hidden="false">
+            <option selected="false" id="Yes" value="Yes"></option>
+            <option selected="true" id="No" value="No"></option>
+        </option>
+    </options>
+    <options name="application.parameter" info="Application Parameters" id="application">
+        <option type="file" name="input.file" width="42" required="false" label="Input File" id="INPUT_FILE" hidden="false"/>
+    </options>
+    <actions>
+        <action name="monitor" label="Monitor">
+            <script value="monitor.sh">
+            </script>
+        </action>
+    </actions>
+</application>
