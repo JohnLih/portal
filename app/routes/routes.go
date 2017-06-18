@@ -12,7 +12,7 @@ func (_ tApp) Index(
 		) string {
 	args := make(map[string]string)
 	
-	return revel.MainRouter.Reverse("App.Index", args).Url
+	return revel.MainRouter.Reverse("App.Index", args).URL
 }
 
 
@@ -24,7 +24,7 @@ func (_ tAppController) TempleteList(
 		) string {
 	args := make(map[string]string)
 	
-	return revel.MainRouter.Reverse("AppController.TempleteList", args).Url
+	return revel.MainRouter.Reverse("AppController.TempleteList", args).URL
 }
 
 func (_ tAppController) Templete(
@@ -33,7 +33,7 @@ func (_ tAppController) Templete(
 	args := make(map[string]string)
 	
 	revel.Unbind(args, "name", name)
-	return revel.MainRouter.Reverse("AppController.Templete", args).Url
+	return revel.MainRouter.Reverse("AppController.Templete", args).URL
 }
 
 func (_ tAppController) Run(
@@ -44,46 +44,7 @@ func (_ tAppController) Run(
 	
 	revel.Unbind(args, "name", name)
 	revel.Unbind(args, "app", app)
-	return revel.MainRouter.Reverse("AppController.Run", args).Url
-}
-
-
-type tTestRunner struct {}
-var TestRunner tTestRunner
-
-
-func (_ tTestRunner) Index(
-		) string {
-	args := make(map[string]string)
-	
-	return revel.MainRouter.Reverse("TestRunner.Index", args).Url
-}
-
-func (_ tTestRunner) Suite(
-		suite string,
-		) string {
-	args := make(map[string]string)
-	
-	revel.Unbind(args, "suite", suite)
-	return revel.MainRouter.Reverse("TestRunner.Suite", args).Url
-}
-
-func (_ tTestRunner) Run(
-		suite string,
-		test string,
-		) string {
-	args := make(map[string]string)
-	
-	revel.Unbind(args, "suite", suite)
-	revel.Unbind(args, "test", test)
-	return revel.MainRouter.Reverse("TestRunner.Run", args).Url
-}
-
-func (_ tTestRunner) List(
-		) string {
-	args := make(map[string]string)
-	
-	return revel.MainRouter.Reverse("TestRunner.List", args).Url
+	return revel.MainRouter.Reverse("AppController.Run", args).URL
 }
 
 
@@ -99,7 +60,7 @@ func (_ tStatic) Serve(
 	
 	revel.Unbind(args, "prefix", prefix)
 	revel.Unbind(args, "filepath", filepath)
-	return revel.MainRouter.Reverse("Static.Serve", args).Url
+	return revel.MainRouter.Reverse("Static.Serve", args).URL
 }
 
 func (_ tStatic) ServeModule(
@@ -112,7 +73,46 @@ func (_ tStatic) ServeModule(
 	revel.Unbind(args, "moduleName", moduleName)
 	revel.Unbind(args, "prefix", prefix)
 	revel.Unbind(args, "filepath", filepath)
-	return revel.MainRouter.Reverse("Static.ServeModule", args).Url
+	return revel.MainRouter.Reverse("Static.ServeModule", args).URL
+}
+
+
+type tTestRunner struct {}
+var TestRunner tTestRunner
+
+
+func (_ tTestRunner) Index(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("TestRunner.Index", args).URL
+}
+
+func (_ tTestRunner) Suite(
+		suite string,
+		) string {
+	args := make(map[string]string)
+	
+	revel.Unbind(args, "suite", suite)
+	return revel.MainRouter.Reverse("TestRunner.Suite", args).URL
+}
+
+func (_ tTestRunner) Run(
+		suite string,
+		test string,
+		) string {
+	args := make(map[string]string)
+	
+	revel.Unbind(args, "suite", suite)
+	revel.Unbind(args, "test", test)
+	return revel.MainRouter.Reverse("TestRunner.Run", args).URL
+}
+
+func (_ tTestRunner) List(
+		) string {
+	args := make(map[string]string)
+	
+	return revel.MainRouter.Reverse("TestRunner.List", args).URL
 }
 
 

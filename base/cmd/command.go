@@ -1,52 +1,54 @@
 package cmd
 
 import (
-	"bytes"
-	"os"
-	"os/exec"
 	"time"
+
+	"github.com/codeskyblue/go-sh"
 )
 
-func Exectuor(command string, args ...string) (output string, err error) {
-	cmd := exec.Command(command, args...)
-	out, err := cmd.CombinedOutput()
-	if out != nil {
-		output = string(out)
-	}
-	return output, err
+type Exectuor struct {
+	Envs    map[string]string
+	Timeout time.Duration
+	Cmd     []string
+	Dir     string
 }
 
-func TimerExectuor(limit time.Duration, command string, args ...string) (output string, err error) {
-	return EnvExectuor(limit, nil, command, args...)
-}
+func (exe *Exectuor) Run() (output string, err error) {
+	session := sh.NewSession()
 
-func EnvExectuor(limit time.Duration, envs []string, command string, args ...string) (output string, err error) {
-	cmd := exec.Command(command, args...)
-	out := &bytes.Buffer{}
-	cmd.Stdout = out
-	if envs != nil {
-		env := os.Environ()
-		env = append(env, envs...)
-		cmd.Env = env
-	}
+	exe.setDir(session)
 
-	err = cmd.Start()
+	exe.setTimeout(session)
+
+	exe.setEnvs(session)
+
+	cmd := exe.Cmd
+	session.Command(cmd[0], cmd[1:])
+	out, err := session.Output()
+
 	if err != nil {
 		return "", err
 	}
 
-	if limit != 0 {
-		timer := time.NewTimer(time.Second * limit)
-		go func(timer *time.Timer, cmd *exec.Cmd) {
-			for _ = range timer.C {
-				if cmd.ProcessState.Exited() {
-					err = cmd.Process.Kill()
-				}
-			}
-		}(timer, cmd)
+	return string(out), err
+}
+
+func (exe *Exectuor) setDir(session *sh.Session) {
+	if exe.Dir != "" {
+		session.SetDir(exe.Dir)
 	}
+}
 
-	cmd.Wait()
+func (exe *Exectuor) setTimeout(session *sh.Session) {
+	if exe.Timeout > 0 {
+		session.SetTimeout(exe.Timeout)
+	}
+}
 
-	return string(out.Bytes()), err
+func (exe *Exectuor) setEnvs(session *sh.Session) {
+	if exe.Envs != nil {
+		for key, val := range exe.Envs {
+			session.SetEnv(key, val)
+		}
+	}
 }

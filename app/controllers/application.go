@@ -18,7 +18,7 @@ func (a AppController) TempleteList() revel.Result {
 	if err != nil {
 		return a.errFunc(err)
 	}
-	return a.RenderJson(l)
+	return a.RenderJSON(l)
 }
 
 func (a AppController) Templete(name string) revel.Result {
@@ -27,7 +27,7 @@ func (a AppController) Templete(name string) revel.Result {
 	if err != nil {
 		return a.errFunc(err)
 	}
-	return a.RenderJson(ap)
+	return a.RenderJSON(ap)
 }
 
 func (a AppController) Run(name string, app apps.Application) revel.Result {
@@ -36,11 +36,11 @@ func (a AppController) Run(name string, app apps.Application) revel.Result {
 	if err != nil {
 		return a.errFunc(err)
 	}
-	return a.RenderJson(out)
+	return a.RenderJSON(out)
 }
 
 func (a AppController) errFunc(err error) revel.Result {
 	revel.ERROR.Println(err)
 	var rt = e.PError{Status: 500, Message: "error"}
-	return a.RenderJson(rt)
+	return a.RenderJSON(rt)
 }

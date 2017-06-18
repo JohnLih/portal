@@ -47,15 +47,19 @@ func Run(name string, app Application) (output string, err error) {
 	script := getAppPath(name)
 	script += ".cmd"
 
-	envs := []string{}
+	envs := make(map[string]string)
 
 	for _, opts := range app.Options {
 		for _, opt := range opts.Option {
-			env := opt.Id + "=" + opt.Text
-			envs = append(envs, env)
+			envs[opt.Id] = opt.Text
 		}
 	}
-	return cmd.EnvExectuor(0, envs, script)
+
+	exe := new(cmd.Exectuor)
+	exe.Envs = envs
+	exe.Cmd = []string{script}
+
+	return exe.Run()
 }
 
 func GetAppList() (l []string, e error) {
